@@ -12,6 +12,7 @@
       #videoElement
       [src]="selectedCam()?.stream"
       autoplay
+      [disablePictureInPicture]="true"
     ></video>
     <canvas #canvasElement style="display: none"></canvas>
   </div>

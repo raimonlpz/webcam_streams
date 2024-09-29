@@ -1,0 +1,16 @@
+@if (totalCams) {
+<div class="flex fixed right-2 bottom-2 z-40">
+  <img
+    class="cursor-pointer m-2 w-12 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300"
+    src="/assets/icons8-add.png"
+    alt="Add Cam"
+    (click)="addCam()"
+  />
+  <img
+    class="cursor-pointer m-2 w-12 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300"
+    src="/assets/icons8-delete.png"
+    alt="Erase all Cams"
+    (click)="eraseAllCams()"
+  />
+</div>
+}

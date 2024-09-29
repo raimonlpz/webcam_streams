@@ -1,0 +1,26 @@
+<div
+  (click)="selectCamera()"
+  (mouseover)="showDetails()"
+  (mouseout)="hideDetails()"
+  class="min-h-48 overflow-auto border-spacing-5 border-gray-500 rounded-xl border-2 border-dotted relative shadow-md shadow-cyan-500/50 relative cursor-pointer"
+>
+  <video
+    class="absolute top-0 left-0 w-full h-full object-cover z-0 hover:opacity-40"
+    #videoElement
+    autoplay
+  ></video>
+  @if (isActive) {
+  <div
+    class="text-xs absolute top-1/2 left-1/2 text-white transform -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+  >
+    <p>
+      Cam ID.: <br />
+      {{ camera.id }}
+    </p>
+    <p>
+      Created At: <br />
+      {{ camera.createdAt | date : "medium" }}
+    </p>
+  </div>
+  }
+</div>

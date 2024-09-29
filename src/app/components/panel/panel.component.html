@@ -1,0 +1,50 @@
+<div
+  class="w-full min-h-[calc(100vh-4rem)] pb-10 border-spacing-5 border-gray-500 rounded-xl border-2 border-dotted"
+>
+  @if (!selectedCamera()) {
+  <app-header [totalCams]="cameras().length"></app-header>
+  <app-controls
+    [totalCams]="cameras().length"
+    (addCamEmit)="addCamera()"
+    (eraseAllCamsEmit)="eraseAllCameras()"
+  ></app-controls>
+  } @else {
+  <app-details
+    (deleteCamEmit)="deleteCamera($event)"
+    (unselectCamEmit)="unselectCamera()"
+  ></app-details>
+  } @if (cameras().length == 0) {
+  <div
+    class="flex flex-col justify-center text-center items-center w-full mt-[50vh] translate-y-[-20vh]"
+  >
+    <img
+      (click)="addCamera()"
+      class="cursor-pointer m-4 w-20 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300"
+      src="/assets/icons8-add.png"
+      alt="Add Cam"
+    />
+    <div class="text-white text-lg font-mono">Start adding Camera streams</div>
+  </div>
+  } @else {
+  <div
+    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 p-4 overflow-y-scroll"
+  >
+    @for (camera of cameras() | paginate: { itemsPerPage: 15, currentPage: page
+    }; track camera.id) {
+    <app-camera
+      (selectCameraEmit)="selectCamera($event)"
+      [camera]="camera"
+    ></app-camera>
+    }
+
+    <div
+      class="fixed bottom-0 left-1/2 transform -translate-x-1/2 p-2 text-white font-mono"
+    >
+      <pagination-controls
+        class="pagination"
+        (pageChange)="page = $event"
+      ></pagination-controls>
+    </div>
+  </div>
+  }
+</div>

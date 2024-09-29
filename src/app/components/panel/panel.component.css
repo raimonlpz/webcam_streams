@@ -1,0 +1,11 @@
+.pagination ::ng-deep .ngx-pagination .pagination-next {
+  background: rgba(44, 100, 255, 0.576);
+}
+
+.pagination ::ng-deep .ngx-pagination li {
+  background: rgba(44, 100, 255, 0.576);
+}
+
+.pagination ::ng-deep .ngx-pagination .pagination-previous {
+  background: rgba(44, 100, 255, 0.576);
+}

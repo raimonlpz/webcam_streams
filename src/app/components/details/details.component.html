@@ -1,0 +1,64 @@
+<div class="fixed w-screen h-screen top-0 left-0 bg-slate-900 p-8 z-50">
+  <div
+    id="shot-container"
+    (click)="screenshot()"
+    class="w-[calc(100vw-300px)] h-full border-spacing-5 border-gray-500 rounded-xl border-2 border-dotted flex flex-col justify-center items-center cursor-pointer"
+  >
+    <h4 class="text-2xl text-white">ID: {{ selectedCam()?.id }}</h4>
+    <p class="text-white">{{ selectedCam()?.createdAt | date : "medium" }}</p>
+    <img src="/assets/icons8-shot.png" alt="Shot" class="w-20" />
+    <video
+      class="absolute top-0 left-0 w-full h-full object-cover z-0 hover:opacity-40"
+      #videoElement
+      [src]="selectedCam()?.stream"
+      autoplay
+    ></video>
+    <canvas #canvasElement style="display: none"></canvas>
+  </div>
+  <div
+    id="detail-lateral"
+    class="flex flex-col absolute right-0 top-0 h-screen w-60 bg-slate-900 p-4 justify-start items-center"
+  >
+    <button
+      (click)="deleteCam()"
+      class="text-rose-500 border-solid border-rose-500 border-2 rounded-xl p-2"
+    >
+      Delete Webcam
+    </button>
+
+    <div
+      id="screenshots"
+      class="flex flex-col p-4 gap-2 overflow-y-scroll rounded-xl relative"
+    >
+      @if (screenshots().length === 0) {
+      <span class="text-xs w-full text-gray-300 text-center left-1/2 top-4"
+        >No Screenshots</span
+      >
+      } @else { @for (shot of screenshots(); track $index) {
+      <div class="group relative">
+        <img
+          [src]="shot"
+          alt="Shot"
+          id="shot"
+          class="w-30 rounded-xl cursor-pointer hover:opacity-40"
+          (click)="downloadScreenshot(shot)"
+        />
+        <img
+          src="/assets/icons8-download.png"
+          alt="Download"
+          class="absolute right-0 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none hidden group-hover:block"
+        />
+      </div>
+      } }
+    </div>
+  </div>
+
+  <div class="flex fixed right-2 bottom-2 z-40">
+    <img
+      (click)="unselectCam()"
+      class="cursor-pointer m-2 w-12 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300"
+      src="/assets/icons8-arrow.png"
+      alt="Go back"
+    />
+  </div>
+</div>
